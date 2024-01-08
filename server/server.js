@@ -3,6 +3,7 @@ const app = express();
 
 //to take request body from frontend
 app.use(express.json());
+app.use(express.static("dist"));
 
 require("dotenv").config();
 const dbConfig = require("./config/dbConfig");

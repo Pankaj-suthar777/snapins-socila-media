@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
+import { LoginUser } from "../../apicalls/users";
 
 const rules = [
   {
@@ -12,7 +13,7 @@ const rules = [
 
 function Login() {
   const navigate = useNavigate();
-  /* const onFinish = async (values) => {
+  const onFinish = async (values) => {
     try {
       const response = await LoginUser(values);
       if (response.success) {
@@ -25,7 +26,7 @@ function Login() {
     } catch (error) {
       message.error(error.message);
     }
-  };*/
+  };
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -47,7 +48,7 @@ function Login() {
           </p>
         </div>
 
-        <Form layout="vertical">
+        <Form layout="vertical" onFinish={onFinish}>
           <h1 className="text-white mb-1">Email :</h1>
           <Form.Item name="email" rules={rules}>
             <input
