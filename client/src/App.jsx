@@ -5,6 +5,7 @@ import AuthLayout from "./comonenets/AuthLayout";
 import Register from "./Pages/Register";
 import Home from "./Pages/Home";
 import ProtectedPage from "./comonenets/ProtectedPage";
+import "./index.css";
 
 function App() {
   return (
@@ -17,9 +18,9 @@ function App() {
         <Route
           path="/"
           element={
-            // <ProtectedPage>
-            <Home></Home>
-            // </ProtectedPage>
+            <ProtectedPage>
+              <Home></Home>
+            </ProtectedPage>
           }
         ></Route>
       </Routes>

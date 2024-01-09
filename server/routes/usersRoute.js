@@ -6,8 +6,6 @@ const authMiddleware = require("../middlewares/authMiddleware");
 // new user
 
 router.post("/register", async (req, res) => {
-  console.log(req.body);
-  console.log("hi");
   try {
     //check if user exist already
     const user = await User.findOne({ email: req.body.email });

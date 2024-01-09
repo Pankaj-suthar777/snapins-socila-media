@@ -49,22 +49,22 @@ function Login() {
         </div>
 
         <Form layout="vertical" onFinish={onFinish}>
-          <h1 className="text-white mb-1">Email :</h1>
-          <Form.Item name="email" rules={rules}>
+          <Form.Item label="Email" name="email" rules={rules}>
             <input
               placeholder="Email"
-              className="w-full bg-gray-500 h-8 rounded-md text-white px-4 py-4 outline-none"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             ></input>
           </Form.Item>
-          <h1 className="text-white mb-1">Password :</h1>
-          <Form.Item name="password" rules={rules}>
+
+          <Form.Item label="Password" name="password" rules={rules}>
             <input
+              type="password"
               placeholder="Password"
-              className="w-full bg-gray-500 h-8 rounded-md text-white px-4 py-4 outline-none"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             ></input>
           </Form.Item>
           <Button
-            className=" h-8 bg-blue-500"
+            className=" h-11 mt-6 bg-blue-500"
             type="primary"
             htmlType="submit"
             block
@@ -73,7 +73,7 @@ function Login() {
           </Button>
           <div className="mt-5 text-center">
             <span className="text-gray-500">
-              Don't have an account? <Link to="/register">Register</Link>
+              Don't have an account? <Link to="/sign-up">Register</Link>
             </span>
           </div>
         </Form>

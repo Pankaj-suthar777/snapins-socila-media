@@ -1,12 +1,14 @@
 import { message } from "antd";
 import { useEffect } from "react";
 
-import { useNavigate } from "react-router-dom";
 import { GetCurrentUser } from "../apicalls/users";
+import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
+import BottomNav from "./BottomNav";
+import Sidebar from "./Sidebar";
 
 const ProtectedPage = ({ children }) => {
   const navigate = useNavigate();
-
   const validateToken = async () => {
     try {
       const response = await GetCurrentUser();
@@ -27,11 +29,24 @@ const ProtectedPage = ({ children }) => {
     if (localStorage.getItem("token")) {
       validateToken();
     } else {
-      navigate("/login");
+      navigate("/sign-in");
     }
   }, []);
 
-  return <div className="p-5">{children}</div>;
+  return (
+    <div>
+      <div className="sm:hidden">
+        <Navbar></Navbar>
+      </div>
+      <div className="sm:block hidden">
+        <Sidebar></Sidebar>
+      </div>
+      <div>{children}</div>
+      <div className="sm:hidden">
+        <BottomNav></BottomNav>
+      </div>
+    </div>
+  );
 };
 
 export default ProtectedPage;

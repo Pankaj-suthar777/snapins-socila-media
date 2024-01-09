@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Form, message } from "antd";
 import logo from "../../assets/images/logo.svg";
 import { Button } from "antd";
@@ -19,8 +19,7 @@ function Register() {
       console.log(response);
       if (response.success) {
         message.success(response.message);
-        localStorage.setItem("token", response.data);
-        window.location.href = "/";
+        navigate("/sign-in");
       } else {
         throw new Error(response.message);
       }
@@ -47,36 +46,40 @@ function Register() {
         </div>
 
         <Form layout="vertical" onFinish={onFinish}>
-          <h1 className="text-white mb-1">Name :</h1>
-          <Form.Item name="name" rules={rules}>
+          <Form.Item label="Name" name="name" rules={rules}>
             <input
               placeholder="Name"
-              className="w-full bg-gray-500 h-8 rounded-md text-white px-4 py-4 outline-none"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             ></input>
           </Form.Item>
-          <h1 className="text-white mb-1">Email :</h1>
-          <Form.Item name="email" rules={rules}>
+
+          <Form.Item label="Email" name="email" rules={rules}>
             <input
               placeholder="Email"
-              className="w-full bg-gray-500 h-8 rounded-md text-white px-4 py-4 outline-none"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             ></input>
           </Form.Item>
-          <h1 className="text-white mb-1">Password :</h1>
-          <Form.Item name="password" rules={rules}>
+
+          <Form.Item label="Password" name="password" rules={rules}>
             <input
               placeholder="Password"
               type="password"
-              className="w-full bg-gray-500 h-8 rounded-md text-white px-4 py-4 outline-none"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             ></input>
           </Form.Item>
           <Button
-            className=" h-8 bg-blue-500"
+            className=" h-11 mt-6 bg-blue-500"
             type="primary"
             htmlType="submit"
             block
           >
             Submit
           </Button>
+          <div className="mt-5 text-center">
+            <span className="text-gray-500">
+              Already have an account? <Link to="/sign-in">Login</Link>
+            </span>
+          </div>
         </Form>
       </div>
     </div>
