@@ -16,7 +16,16 @@ const userSchema = new mongoose.Schema(
     },
     profilePicture: {
       type: String,
-      default: "",
+      default:
+        "https://qph.cf2.quoracdn.net/main-qimg-53f84f41a5ea14d51ce497c561204291-lq",
+    },
+    following: {
+      type: Array,
+      default: [],
+    },
+    followers: {
+      type: Array,
+      default: [],
     },
   },
   {

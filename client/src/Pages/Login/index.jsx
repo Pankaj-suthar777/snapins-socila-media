@@ -3,6 +3,8 @@ import { Button, Form, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
 import { LoginUser } from "../../apicalls/users";
+import { useDispatch } from "react-redux";
+import { SetLoader } from "../../redux/loaderSlice";
 
 const rules = [
   {
@@ -12,10 +14,13 @@ const rules = [
 ];
 
 function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const onFinish = async (values) => {
     try {
+      dispatch(SetLoader(true));
       const response = await LoginUser(values);
+      dispatch(SetLoader(false));
       if (response.success) {
         message.success(response.message);
         localStorage.setItem("token", response.data);
@@ -24,6 +29,7 @@ function Login() {
         throw new Error(response.message);
       }
     } catch (error) {
+      dispatch(SetLoader(false));
       message.error(error.message);
     }
   };
@@ -41,9 +47,9 @@ function Login() {
           <img src={logo}></img>
         </div>
 
-        <div className="flex flex-col justify-center items-center mt-5 mb-2">
+        <div className="flex flex-col mb-6 justify-center items-center mt-5">
           <h1 className="text-2xl font-bold">Log in to your account</h1>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm mt-6 text-gray-400">
             Welcome back! Please enter your details.
           </p>
         </div>

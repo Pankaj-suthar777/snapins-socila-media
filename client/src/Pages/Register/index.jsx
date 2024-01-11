@@ -4,6 +4,8 @@ import { Form, message } from "antd";
 import logo from "../../assets/images/logo.svg";
 import { Button } from "antd";
 import { RegisterUser } from "../../apicalls/users";
+import { useDispatch } from "react-redux";
+import { SetLoader } from "../../redux/loaderSlice";
 const rules = [
   {
     required: true,
@@ -12,15 +14,19 @@ const rules = [
 ];
 
 function Register() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const onFinish = async (values) => {
     try {
+      dispatch(SetLoader(true));
       const response = await RegisterUser(values);
+      dispatch(SetLoader(false));
       console.log(response);
       if (response.success) {
         message.success(response.message);
         navigate("/sign-in");
       } else {
+        dispatch(SetLoader(false));
         throw new Error(response.message);
       }
     } catch (error) {
@@ -40,9 +46,11 @@ function Register() {
           <img src={logo}></img>
         </div>
 
-        <div className="flex flex-col justify-center items-center mt-5 mb-2">
+        <div className="flex flex-col justify-center items-center mt-5 mb-7">
           <h1 className="text-2xl font-bold">Create a new account</h1>
-          <p className="text-sm text-gray-400">Please enter your details.</p>
+          <p className="text-sm text-gray-400 mt-4">
+            Please enter your details.
+          </p>
         </div>
 
         <Form layout="vertical" onFinish={onFinish}>

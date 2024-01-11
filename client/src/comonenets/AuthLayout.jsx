@@ -11,7 +11,7 @@ function AuthLayout() {
       <img
         src={sideimg}
         alt=""
-        className="hidden xl:block h-screen w-1/2 object-cover bg-no-repeat"
+        className="hidden img-start lg:block h-[800px] w-1/2 object-cover  bg-no-repeat"
       ></img>
     </>
   );
