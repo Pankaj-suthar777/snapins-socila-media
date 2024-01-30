@@ -6,6 +6,7 @@ import { Form, message } from "antd";
 import { Addpost } from "../apicalls/post";
 import { useDispatch } from "react-redux";
 import { SetLoader } from "../redux/loaderSlice";
+import { useRef } from "react";
 
 const style = {
   position: "absolute",
@@ -28,15 +29,17 @@ const ModalComponent = ({
   description,
   setDescription,
 }) => {
+  const formRef = useRef(null);
   const dispatch = useDispatch();
-  async function handlePost(values) {
+  async function handlePost() {
     try {
       dispatch(SetLoader(true));
-      const res = await Addpost({ description, file });
+      const res = await Addpost({ description });
       if (res.success) {
         dispatch(SetLoader(false));
         message.success("Post Created Successfully");
       }
+      setShowCreate(false);
     } catch (error) {
       dispatch(SetLoader(false));
       message.error(error.message || "something went wrong");
@@ -48,7 +51,7 @@ const ModalComponent = ({
       <Modal open={showCreate} onClose={() => setShowCreate(false)}>
         <Box sx={style}>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <Form onFinish={handlePost}>
+            <Form onFinish={handlePost} ref={formRef}>
               <textarea
                 className="description w-full text-white bg-gray-800  p-3 h-[140px] border border-gray-900 outline-none rounded-xl mb-3"
                 placeholder="Describe everything about this post here"
@@ -70,7 +73,10 @@ const ModalComponent = ({
               >
                 Cancel
               </div>
-              <div className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500 rounded-xl">
+              <div
+                className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500 rounded-xl"
+                onClick={() => formRef.current.submit()}
+              >
                 Post
               </div>
             </div>
