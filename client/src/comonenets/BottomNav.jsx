@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 function BottomNav() {
   const navigate = useNavigate();
   const [color, setColor] = useState("home");
+
   return (
     <div className="fixed flex   items-center justify-center bottom-0 left-0 right-0 w-screen bg-stone-900 h-[70px] rounded-t-md sm:hidden">
       <div className="text-white items-center flex w-full justify-around text-xl">
@@ -46,15 +47,15 @@ function BottomNav() {
 
         <div
           className={`flex items-center rounded-xl px-4 py-1 flex-col ${
-            color === "create" ? "bg-blue-500" : ""
+            color === "profile" ? "bg-blue-500" : ""
           }`}
           onClick={() => {
-            navigate("/create");
-            setColor("create");
+            navigate("/profile");
+            setColor("profile");
           }}
         >
-          <i className="ri-image-edit-line"></i>
-          <span className="text-sm">Create</span>
+          <i className="ri-settings-3-line"></i>
+          <span className="text-sm">Setting</span>
         </div>
       </div>
     </div>

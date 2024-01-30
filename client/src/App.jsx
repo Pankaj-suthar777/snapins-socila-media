@@ -10,7 +10,7 @@ import "./index.css";
 import Spinner from "./comonenets/Spinner.jsx";
 import Explore from "./Pages/Explore";
 import Saved from "./Pages/Saved/index.jsx";
-import Create from "./Pages/Create/index.jsx";
+import Profile from "./Pages/Profile";
 
 function App() {
   const { loading } = useSelector((state) => state.loaders);
@@ -47,10 +47,10 @@ function App() {
           }
         ></Route>
         <Route
-          path="/create"
+          path="/profile"
           element={
             <ProtectedPage>
-              <Create></Create>
+              <Profile></Profile>
             </ProtectedPage>
           }
         ></Route>
